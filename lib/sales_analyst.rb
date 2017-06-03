@@ -10,24 +10,25 @@ class SalesAnalyst
   end
 
   def average_items_per_merchant
-    var = collected_items_array
-    average = (var.reduce(0) { |sum, num| sum += num})/var.length.to_f
+    merchant = sales_engine.merchants.all
+    items = sales_engine.items.all
+
+    average = (items.length.to_f)/(merchant.length)
     average.round(2)
   end
 
   def average_invoices_per_merchant
     var = collected_invoices_array
-    average = (var.reduce(0) { |sum, num| sum += num})/var.length.to_f
+    average = (var.reduce(0) { |sum, num| sum += num})/var.length
     average.round(2)
   end
 
-
-  def collected_items_array
-      all_merchants = []
-      merchant_array = @sales_engine.merchants.all
-      merchant_array.each do |merchant|
-        item = merchant.items
-        all_merchants << item.length
+  def collected_items_hash
+      all_merchants = {}
+      mr = @sales_engine.merchants.all
+      mr.each do |merchant|
+        item = sales_engine.collected_items(merchant.id)
+        all_merchants[merchant.id] = item.length
       end
       all_merchants
   end
@@ -37,21 +38,20 @@ class SalesAnalyst
       merchant_array = @sales_engine.merchants.all
       merchant_array.each do |merchant|
         invoice = merchant.invoices
-        all_merchants << invoice.length
+        all_invoices << invoice.length
       end
       all_invoices
   end
 
   def average_items_per_merchant_standard_deviation
-    standard_deviation
+    values = collected_items_hash.values
+    standard_deviation(values)
   end
 
-  def standard_deviation
-    array_1 = collected_items_array
-    average = average_items_per_merchant
-    array_2 = array_1.map{|num| (num-average)**2}
-    final = Math.sqrt((array_2.reduce(:+))/(array_2.length-1))
-    final.round(2)
+  def standard_deviation(values)
+    average = values.reduce(:+)/values.length.to_f
+    average_average = values.reduce(0) {|val, num| val += ((num - average)**2) }
+    Math.sqrt(average_average / (values.length-1)).round(2)
   end
 
   def merchants_with_high_item_count
@@ -85,7 +85,7 @@ class SalesAnalyst
   def golden_items
     ir = sales_engine.items.all
     prices = ir.map {|item| item.unit_price}
-    dev = (average_average_price_per_merchant) + (standard_deviation * 2)
+    dev = (average_average_price_per_merchant) + (standard_deviation(prices) * 2)
     ir.find_all do |item|
       item.unit_price >= dev
     end

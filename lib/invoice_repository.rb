@@ -1,6 +1,4 @@
 require 'csv'
-require 'minitest/autorun'
-require 'minitest/pride'
 require_relative 'invoice'
 require 'pry'
 
@@ -21,6 +19,10 @@ class InvoiceRepository
       all << invoice
     end
     invoice_lines.close
+  end
+
+  def inspect
+    "#<#{self.class} #{@invoices.size} rows>"
   end
 
   def find_by_id(id)

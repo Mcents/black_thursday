@@ -93,7 +93,7 @@ class SalesAnalystTest < MiniTest::Test
     })
     sa = SalesAnalyst.new(se)
 
-    assert_equal 2.88, sa.average_invoices_per_merchant
+    assert_equal 10.0, sa.average_invoices_per_merchant
   end
-  
+
 end
