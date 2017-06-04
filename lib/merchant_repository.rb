@@ -14,9 +14,9 @@ class MerchantRepository
     populate_merchant_repo(file)
   end
 
-  # def inspect
-  #   "#<#{self.class} #{@merchants.size} rows>"
-  # end
+  def inspect
+    "#<#{self.class} #{@merchants.size} rows>"
+  end
 
   def populate_merchant_repo(file)
     merchant_lines = CSV.open(file, headers: true, header_converters: :symbol)

@@ -13,6 +13,7 @@ class InvoiceRepositoryTest < MiniTest::Test
 
     assert_equal invoice.id, id
     assert_instance_of Invoice, invoice
+    assert_equal :shipped, invoice.status
   end
 
   def test_find_by_all_by_customer_id
@@ -31,7 +32,7 @@ class InvoiceRepositoryTest < MiniTest::Test
   def test_if_can_find_all_by_merchant_id
     ir  = InvoiceRepository.new("./test/data/invoices_fixture.csv", sales_engine = nil)
 
-    assert_equal 7, ir.find_all_by_status("pending").length
+    assert_equal 7, ir.find_all_by_status(:pending).length
   end
 
 
