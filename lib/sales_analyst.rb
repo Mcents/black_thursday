@@ -7,15 +7,6 @@ class SalesAnalyst
 
   def initialize(sales_engine)
     @sales_engine = sales_engine
-    @weekdays = [
-      "Sunday",
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday"
-    ]
   end
 
   def average_items_per_merchant
@@ -173,5 +164,22 @@ class SalesAnalyst
       count > (average + day_deviation)
     end
   end
+
+  def invoice_staus_percentage(array)
+    percentage = BigDecimal.new(array.length) / BigDecimal.new(@sales_engine.invoices.all.length)
+    percentage = percentage.to_f * 100
+    percentage.round(2)
+  end
+
+  def invoice_status(status_symbol)
+    array_1 = []
+    @sales_engine.invoices.all.each do |invoice|
+      if invoice.status == status_symbol.to_s
+        array_1 << invoice
+      end
+    end
+    invoice_staus_percentage(array_1)
+  end
+
 
 end

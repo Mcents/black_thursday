@@ -141,4 +141,14 @@ class SalesAnalystTest < MiniTest::Test
     assert_equal [["Wednesday", 741]], sa.top_days_by_invoice_count
   end
 
+  def test_it_calculates_percentage_of_invoices_status
+    se = SalesEngine.from_csv({
+      :items     => "./data/items.csv",
+      :merchants => "./data/merchants.csv",
+      :invoices => './data/invoices.csv'
+    })
+    sa = SalesAnalyst.new(se)
+    assert_equal 29.55, sa.invoice_status(:pending)
+  end
+
 end
