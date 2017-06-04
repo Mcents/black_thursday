@@ -93,7 +93,18 @@ class SalesAnalystTest < MiniTest::Test
     })
     sa = SalesAnalyst.new(se)
 
-    assert_equal 10.0, sa.average_invoices_per_merchant
+    assert_equal 10.49, sa.average_invoices_per_merchant
+  end
+
+  def test_it_can_get_average_invoice_standard_deviation
+    se = SalesEngine.from_csv({
+    :items     => "./data/items.csv",
+    :merchants => "./data/merchants.csv",
+    :invoices => "./data/invoices.csv",
+    })
+    sa = SalesAnalyst.new(se)
+
+    assert_equal 3.29, sa.average_invoices_per_merchant_standard_deviation
   end
 
 end

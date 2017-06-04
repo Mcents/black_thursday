@@ -18,8 +18,10 @@ class SalesAnalyst
   end
 
   def average_invoices_per_merchant
-    var = collected_invoices_array
-    average = (var.reduce(0) { |sum, num| sum += num})/var.length
+    merchant = sales_engine.merchants.all
+    invoices = sales_engine.invoices.all
+
+    average = (invoices.length.to_f)/(merchant.length)
     average.round(2)
   end
 
@@ -33,18 +35,23 @@ class SalesAnalyst
       all_merchants
   end
 
-  def collected_invoices_array
-      all_invoices = []
-      merchant_array = @sales_engine.merchants.all
-      merchant_array.each do |merchant|
-        invoice = merchant.invoices
-        all_invoices << invoice.length
+  def collected_invoices_hash
+      all_invoices = {}
+      mr = @sales_engine.merchants.all
+      mr.each do |merchant|
+        invoice = sales_engine.collected_invoices(merchant.id)
+        all_invoices[merchant.id] = invoice.length
       end
       all_invoices
   end
 
   def average_items_per_merchant_standard_deviation
     values = collected_items_hash.values
+    standard_deviation(values)
+  end
+
+  def average_invoices_per_merchant_standard_deviation
+    values = collected_invoices_hash.values
     standard_deviation(values)
   end
 
