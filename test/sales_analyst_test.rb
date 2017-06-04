@@ -119,4 +119,16 @@ class SalesAnalystTest < MiniTest::Test
 
   end
 
+  def test_top_merchants_by_invoice_count
+    se = SalesEngine.from_csv({
+    :items     => "./data/items.csv",
+    :merchants => "./data/merchants.csv",
+    :invoices => "./data/invoices.csv",
+    })
+    sa = SalesAnalyst.new(se)
+
+    assert_equal 16, sa.bottom_merchants_by_invoice_count.length
+
+  end
+
 end

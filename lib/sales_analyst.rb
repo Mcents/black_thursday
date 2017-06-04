@@ -124,4 +124,21 @@ class SalesAnalyst
     array
   end
 
+  def bottom_merchants_by_invoice_count
+    average_invoice = {}
+    mr = @sales_engine.merchants.all
+    mr.each do |merchant|
+      x = merchant.invoices
+      average_invoice[x.length] = merchant
+    end
+    array = []
+    stddev = average_invoices_per_merchant_standard_deviation
+    average_invoice.each_pair do |num, merchant|
+      if num < (average_invoices_per_merchant + stddev*2)
+        array << merchant.name
+      end
+    end
+    array
+  end
+
 end
