@@ -7,6 +7,15 @@ class SalesAnalyst
 
   def initialize(sales_engine)
     @sales_engine = sales_engine
+    @weekdays = [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday"
+    ]
   end
 
   def average_items_per_merchant
@@ -139,6 +148,30 @@ class SalesAnalyst
       end
     end
     array
+  end
+
+  def generate_deviation(mean, items)
+    pre_deviation = (items.reduce(0) do |sum, avg_num|
+      sum + ((avg_num - mean) ** 2)
+    end)/(items.count - 1).to_f
+    Math.sqrt(pre_deviation).round(2)
+  end
+
+  def collect_invoices_per_day
+    sales_engine.invoices.all.reduce(Hash.new(0)) do |days, invoice|
+      invoice_day = invoice.created_at.strftime("%A")
+      days[invoice_day] += 1
+      days
+    end
+  end
+
+  def top_days_by_invoice_count
+    average = (sales_engine.invoices.all.count / 7).to_f
+    invoices_per_day = collect_invoices_per_day.values
+    day_deviation = generate_deviation(average, invoices_per_day)
+    collect_invoices_per_day.find_all do |day,count|
+      count > (average + day_deviation)
+    end
   end
 
 end

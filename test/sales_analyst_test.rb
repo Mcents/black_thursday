@@ -131,4 +131,14 @@ class SalesAnalystTest < MiniTest::Test
 
   end
 
+  def test_it_calculates_top_days_by_invoice_count
+    se = SalesEngine.from_csv({
+      :items     => "./data/items.csv",
+      :merchants => "./data/merchants.csv",
+      :invoices => './data/invoices.csv'
+    })
+    sa = SalesAnalyst.new(se)
+    assert_equal [["Wednesday", 741]], sa.top_days_by_invoice_count
+  end
+
 end
