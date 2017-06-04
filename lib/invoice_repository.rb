@@ -21,9 +21,9 @@ class InvoiceRepository
     invoice_lines.close
   end
 
-  def inspect
-    "#<#{self.class} #{@invoices.size} rows>"
-  end
+  # def inspect
+  #   "#<#{self.class} #{@invoices.size} rows>"
+  # end
 
   def find_by_id(id)
     all.find do |invoice|
