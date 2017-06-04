@@ -1,5 +1,6 @@
-require 'minitest/autorun'
-require 'minitest/pride'
+# require 'simplecov'
+# SimpleCov.start
+require './test/test_helper'
 require_relative '../lib/merchant'
 require 'pry'
 
