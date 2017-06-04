@@ -83,7 +83,6 @@ class SalesAnalyst
     array_1 = []
     sales_engine.merchants.all.each do |merch|
       array_1 << average_item_price_for_merchant(merch.id)
-      binding.pry
     end
     array_2 = (array_1.reduce(:+)/array_1.length)
     array_2.round(2)
