@@ -97,16 +97,6 @@ class SalesAnalyst
     end
   end
 
-  # def top_merchants_by_invoice_count
-  #   ir = sales_engine.invoices.all
-  #   sum = [ir.length]
-  #   dev = (average_invoices_per_merchant_standard_deviation * 2)
-  #   mr = sales_engine.merchants.all
-  #   mr.find_all do |merch|
-  #     merch.invoices.count >= dev
-  #   end
-  # end
-
   def top_merchants_by_invoice_count
       top_merchants = (average_invoices_per_merchant_standard_deviation * 2) + average_invoices_per_merchant
 

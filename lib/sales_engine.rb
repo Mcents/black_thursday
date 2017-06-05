@@ -7,13 +7,15 @@ require 'csv'
 class SalesEngine
   attr_reader :merchants,
               :items,
-              :invoices
+              :invoices,
+              :invoice_items
 
 
   def initialize(hash)
     @items = ItemRepository.new(hash[:items], self)
     @merchants = MerchantRepository.new(hash[:merchants], self)
     @invoices = InvoiceRepository.new(hash[:invoices], self)
+    @invoice_items = InvoiceItemRepository.new(hash[:invoice_items], self)
   end
 
   def self.from_csv(hash)
