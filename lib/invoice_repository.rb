@@ -33,7 +33,7 @@ class InvoiceRepository
 
   def find_all_by_customer_id(customer_id)
     final = all.find_all do |invoice|
-      invoice.id == customer_id
+      invoice.customer_id == customer_id
     end
     final
   end

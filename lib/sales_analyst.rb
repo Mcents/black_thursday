@@ -108,37 +108,19 @@ class SalesAnalyst
   # end
 
   def top_merchants_by_invoice_count
-    average_invoice = {}
-    mr = @sales_engine.merchants.all
-    mr.each do |merchant|
-      x = merchant.invoices
-      average_invoice[x.length] = merchant
-    end
-    array = []
-    stddev = average_invoices_per_merchant_standard_deviation
-    average_invoice.each_pair do |num, merchant|
-      if num > (average_invoices_per_merchant + stddev*2)
-        array << merchant.name
+      top_merchants = (average_invoices_per_merchant_standard_deviation * 2) + average_invoices_per_merchant
+
+      sales_engine.merchants.all.find_all do |merchant|
+        merchant.invoices.count > top_merchants
       end
     end
-    array
-  end
 
   def bottom_merchants_by_invoice_count
-    average_invoice = {}
-    mr = @sales_engine.merchants.all
-    mr.each do |merchant|
-      x = merchant.invoices
-      average_invoice[x.length] = merchant
+    bottom_merchants = average_invoices_per_merchant - (average_invoices_per_merchant_standard_deviation * 2)
+
+    sales_engine.merchants.all.find_all do |merchant|
+      merchant.invoices.count < bottom_merchants
     end
-    array = []
-    stddev = average_invoices_per_merchant_standard_deviation
-    average_invoice.each_pair do |num, merchant|
-      if num < (average_invoices_per_merchant + stddev*2)
-        array << merchant.name
-      end
-    end
-    array
   end
 
   def generate_deviation(mean, items)
@@ -174,12 +156,11 @@ class SalesAnalyst
   def invoice_status(status_symbol)
     array_1 = []
     @sales_engine.invoices.all.each do |invoice|
-      if invoice.status == status_symbol.to_s
+      if invoice.status == status_symbol
         array_1 << invoice
       end
     end
     invoice_staus_percentage(array_1)
   end
-
 
 end

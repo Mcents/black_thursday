@@ -115,7 +115,7 @@ class SalesAnalystTest < MiniTest::Test
     })
     sa = SalesAnalyst.new(se)
 
-    assert_equal 4, sa.top_merchants_by_invoice_count.length
+    assert_equal 12, sa.top_merchants_by_invoice_count.length
 
   end
 
@@ -127,7 +127,7 @@ class SalesAnalystTest < MiniTest::Test
     })
     sa = SalesAnalyst.new(se)
 
-    assert_equal 16, sa.bottom_merchants_by_invoice_count.length
+    assert_equal 4, sa.bottom_merchants_by_invoice_count.length
 
   end
 
