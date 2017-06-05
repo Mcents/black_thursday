@@ -17,19 +17,26 @@ class TransactionRepositoryTest < MiniTest::Test
     assert_instance_of Transaction, trans
   end
 
-  # def test_it_can_find_all_by_item_id
-  #   ir = InvoiceItemRepository.new('./test/data/invoice_items_fixture.csv', sales_engine = nil)
-  #   invoice = ir.find_all_by_item_id(263542298)
-  #
-  #   assert_equal 1, invoice.count
-  # end
-  #
-  # def test_it_can_find_all_by_item_id
-  #   ir = InvoiceItemRepository.new('./test/data/invoice_items_fixture.csv', sales_engine = nil)
-  #   invoice = ir.find_all_by_invoice_id(2)
-  #
-  #   assert_equal 1, invoice.count
-  # end
+  def test_it_can_find_all_invoice_id
+    tr = TransactionRepository.new('./test/data/transactions_fixture.csv', sales_engine = nil)
+    trans = tr.find_all_by_invoice_id(2179)
+
+    assert_equal 1, trans.count
+  end
+
+  def test_it_can_find_all_by_credit_card_number
+    tr = TransactionRepository.new('./test/data/transactions_fixture.csv', sales_engine = nil)
+    trans = tr.find_all_by_credit_card_number(4068631943231473)
+
+    assert_equal 1, trans.count
+  end
+
+  def test_it_can_find_all_by_result
+    tr = TransactionRepository.new('./test/data/transactions_fixture.csv', sales_engine = nil)
+    trans = tr.find_all_by_result(:success)
+
+    assert_equal 8, trans.count
+  end
 
 
 end
