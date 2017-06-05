@@ -24,6 +24,4 @@ class InvoiceItem
     unit_price.to_f
   end
 
-
-
 end

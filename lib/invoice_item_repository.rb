@@ -1,4 +1,8 @@
+require 'csv'
+require_relative 'invoice_item'
 class InvoiceItemRepository
+  attr_reader :all
+
 
   def initialize(file, sales_engine)
     @all = []
@@ -9,8 +13,8 @@ class InvoiceItemRepository
   def populate_invoice_item_repo(file)
     invoice_item_lines = CSV.open(file, headers: true, header_converters: :symbol)
     invoice_item_lines.each do |row|
-      item = Item.new(row, self)
-      all << item
+      invoice_item = InvoiceItem.new(row, self)
+      all << invoice_item
     end
     invoice_item_lines.close
   end
