@@ -45,6 +45,10 @@ class SalesEngine
     @transactions.find_all_by_invoice_id(invoice_id)
   end
 
+  def collected_customers(id)
+    @customers.find_by_id(id)
+  end
+
   se = SalesEngine.from_csv({
   :items => "./data/items.csv",
   :merchants => "./data/merchants.csv",

@@ -29,8 +29,11 @@ class Invoice
   end
 
   def transactions
-    @iv_repo.transactions_in_trans_repo(id)
+    @iv_repo.transactions_in_inv_repo(id)
   end
 
+  def customer
+    @iv_repo.customer_in_inv_repo(@customer_id)
+  end
 
 end
