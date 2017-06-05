@@ -3,6 +3,8 @@ require_relative 'merchant_repository'
 require_relative 'item_repository'
 require_relative 'invoice_repository'
 require_relative 'invoice_item_repository'
+require_relative 'transaction_repository'
+require_relative 'customer_repository'
 require 'csv'
 
 class SalesEngine
@@ -38,5 +40,21 @@ class SalesEngine
   def merchant(item_id)
     @merchants.merchant(item_id)
   end
+
+  def collected_transactions(invoice_id)
+    @transactions.find_all_by_invoice_id(invoice_id)
+  end
+
+  se = SalesEngine.from_csv({
+  :items => "./data/items.csv",
+  :merchants => "./data/merchants.csv",
+  :invoices => "./data/invoices.csv",
+  :invoice_items => "./data/invoice_items.csv",
+  :transactions => "./data/transactions.csv",
+  :customers => "./data/customers.csv"
+})
+
+binding.pry
+
 
 end

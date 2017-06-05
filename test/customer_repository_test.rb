@@ -24,17 +24,10 @@ class CustomerRepositoryTest < MiniTest::Test
     assert_equal 1, cust.count
   end
 
-  # def test_it_can_find_all_by_credit_card_number
-  #   tr = TransactionRepository.new('./test/data/transactions_fixture.csv', sales_engine = nil)
-  #   trans = tr.find_all_by_credit_card_number(4068631943231473)
-  #
-  #   assert_equal 1, trans.count
-  # end
-  #
-  # def test_it_can_find_all_by_result
-  #   tr = TransactionRepository.new('./test/data/transactions_fixture.csv', sales_engine = nil)
-  #   trans = tr.find_all_by_result(:success)
-  #
-  #   assert_equal 8, trans.count
-  # end
+  def test_it_can_find_all_by_first_name
+    cr = CustomerRepository.new('./test/data/customers_fixture.csv', sales_engine = nil)
+    cust = cr.find_all_by_last_name("Ondricka")
+
+    assert_equal 1, cust.count
+  end
 end

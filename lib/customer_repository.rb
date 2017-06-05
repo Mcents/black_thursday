@@ -42,7 +42,4 @@ class CustomerRepository
     end
   end
 
-
-
-
 end

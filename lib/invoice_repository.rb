@@ -54,4 +54,13 @@ class InvoiceRepository
     @sales_engine.merchant(merchant_id)
   end
 
+  def items_in_invoice_repo(merchant_id)
+    @sales_engine.collected_invoices(merchant_id)
+  end
+
+  def transactions_in_trans_repo(invoice_id)
+    @sales_engine.collected_transactions(invoice_id)
+  end
+
+
 end
