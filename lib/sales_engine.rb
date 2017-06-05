@@ -81,6 +81,13 @@ class SalesEngine
     @merchants.merchants_by_id(merchant_ids)
   end
 
+  def total(id)
+    @invoice_items.total(id)
+  end
+
+  def is_paid_in_full?(invoice_id)
+    @transactions.is_paid_in_full?(invoice_id)
+  end
 
   se = SalesEngine.from_csv({
   :items => "./data/items.csv",

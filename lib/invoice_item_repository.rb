@@ -1,5 +1,6 @@
 require 'csv'
 require_relative 'invoice_item'
+
 class InvoiceItemRepository
   attr_reader :all
 
@@ -39,6 +40,16 @@ class InvoiceItemRepository
     all.find_all do |invoice_item|
      invoice_item.invoice_id == id
     end
+  end
+
+  def total(invoice_id)
+    invoice_items = all.select do |invoice_item|
+        invoice_item.invoice_id == invoice_id
+    end
+    total = invoice_items.map do |invoice_item|
+      invoice_item.unit_price * invoice_item.quantity
+    end
+    total.reduce(:+)
   end
 
 

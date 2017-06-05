@@ -66,4 +66,16 @@ class InvoiceRepository
     @sales_engine.collected_customers(customer_id)
   end
 
+  def is_paid_in_full?(invoice_id)
+    @sales_engine.is_paid_in_full?(invoice_id)
+  end
+
+  def total(id)
+    @sales_engine.total(id)
+  end
+
+  # def invoice_repo_paid_in_full?(id)
+  #   @sales_engine.invoice_paid_in_full?(id)
+  # end
+
 end
