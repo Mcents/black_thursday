@@ -17,4 +17,8 @@ class Customer
     @updated_at                    = Time.parse(hash[:updated_at])
   end
 
+  def merchants
+    @cr.merch_in_cust_repo(id)
+  end
+
 end

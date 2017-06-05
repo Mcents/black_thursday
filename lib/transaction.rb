@@ -20,5 +20,9 @@ class Transaction
     @updated_at                    = Time.parse(hash[:updated_at])
   end
 
+  def invoice
+    @tr.invoices_in_trans_repo(invoice_id)
+  end
+
 
 end

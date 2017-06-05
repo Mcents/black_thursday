@@ -2,6 +2,7 @@ require 'minitest/autorun'
 require 'minitest/pride'
 require_relative '../lib/sales_engine'
 require 'pry'
+require 'csv'
 
 
 class SalesEngineTest < MiniTest::Test
@@ -9,7 +10,11 @@ class SalesEngineTest < MiniTest::Test
   def test_items_searched_by_id
     se = SalesEngine.from_csv({
     :items     => "./data/items.csv",
-    :merchants => "./data/merchants.csv"})
+    :merchants => "./data/merchants.csv",
+    :invoices => "./data/invoices.csv",
+    :invoice_items => "./data/invoice_items.csv",
+    :transactions => "./data/transactions.csv",
+    :customers => "./data/customers.csv"})
     items = se.items
     assert_instance_of Item, items.find_by_id(263395237)
   end

@@ -49,6 +49,39 @@ class SalesEngine
     @customers.find_by_id(id)
   end
 
+  def find_customers_by_merchant_id(merchant_id)
+    result = @invoices.find_all_by_merchant_id(merchant_id)
+    result = iterate_customers(result)
+    customers_by_id(result)
+  end
+
+  def find_merchants_by_customer_id(customer_id)
+    invoices = @invoices.find_all_by_customer_id(customer_id)
+    merchant_ids = iterate_merchants(invoices)
+    merchants_by_id(merchant_ids)
+  end
+
+  def iterate_customers(invoices)
+    invoices = invoices.map do |invoice|
+      invoice.customer_id
+    end
+  end
+
+  def iterate_merchants(invoices)
+    invoices = invoices.map do |invoice|
+      invoice.merchant_id
+    end
+  end
+
+  def customers_by_id(customer_ids)
+    @customers.customers_by_id(customer_ids)
+  end
+
+  def merchants_by_id(merchant_ids)
+    @merchants.merchants_by_id(merchant_ids)
+  end
+
+
   se = SalesEngine.from_csv({
   :items => "./data/items.csv",
   :merchants => "./data/merchants.csv",

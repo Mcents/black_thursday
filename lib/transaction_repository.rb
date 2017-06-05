@@ -48,5 +48,9 @@ class TransactionRepository
     end
   end
 
+  def invoices_in_trans_repo(id)
+    @sales_engine.collected_transactions(id)
+  end
+
 
 end

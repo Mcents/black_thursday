@@ -60,4 +60,15 @@ class MerchantRepository
   def merchant(item_id)
     find_by_id(item_id)
   end
+
+  def customers_in_merch_repo(id)
+    @sales_engine.find_customers_by_merchant_id(id)
+  end
+
+  def merchants_by_id(merchant_ids)
+    results = merchant_ids.map do |merchant_id|
+      find_by_id(merchant_id)
+    end
+  end
+
 end
