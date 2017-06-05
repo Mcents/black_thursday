@@ -10,7 +10,8 @@ class SalesEngine
               :items,
               :invoices,
               :invoice_items,
-              :transactions
+              :transactions,
+              :customers
 
 
   def initialize(hash)
@@ -19,6 +20,7 @@ class SalesEngine
     @invoices = InvoiceRepository.new(hash[:invoices], self)
     @invoice_items = InvoiceItemRepository.new(hash[:invoice_items], self)
     @transactions = TransactionRepository.new(hash[:transactions], self)
+    @customers = CustomerRepository.new(hash[:customers], self)
   end
 
   def self.from_csv(hash)

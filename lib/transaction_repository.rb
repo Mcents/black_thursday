@@ -14,8 +14,8 @@ class TransactionRepository
   def populate_transaction_repo(file)
     tran_lines = CSV.open(file, headers: true, header_converters: :symbol)
     tran_lines.each do |row|
-      item = Transaction.new(row, self)
-      all << item
+      tran = Transaction.new(row, self)
+      all << tran
     end
     tran_lines.close
   end
