@@ -32,7 +32,4 @@ class InvoiceItemRepositoryTest < MiniTest::Test
   end
 
 
-
-
-
 end
