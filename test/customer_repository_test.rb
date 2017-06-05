@@ -17,13 +17,13 @@ class CustomerRepositoryTest < MiniTest::Test
     assert_instance_of Customer, cust
   end
 
-  # def test_it_can_find_all_invoice_id
-  #   tr = TransactionRepository.new('./test/data/transactions_fixture.csv', sales_engine = nil)
-  #   trans = tr.find_all_by_invoice_id(2179)
-  #
-  #   assert_equal 1, trans.count
-  # end
-  #
+  def test_it_can_find_all_by_first_name
+    cr = CustomerRepository.new('./test/data/customers_fixture.csv', sales_engine = nil)
+    cust = cr.find_all_by_first_name("Joey")
+
+    assert_equal 1, cust.count
+  end
+
   # def test_it_can_find_all_by_credit_card_number
   #   tr = TransactionRepository.new('./test/data/transactions_fixture.csv', sales_engine = nil)
   #   trans = tr.find_all_by_credit_card_number(4068631943231473)
