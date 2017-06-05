@@ -37,6 +37,4 @@ class TransactionRepositoryTest < MiniTest::Test
 
     assert_equal 8, trans.count
   end
-
-
 end
