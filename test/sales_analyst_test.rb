@@ -3,6 +3,7 @@ require 'minitest/autorun'
 require 'minitest/pride'
 require_relative '../lib/sales_engine'
 require_relative '../lib/sales_analyst'
+require 'csv'
 
 
 class SalesAnalystTest < MiniTest::Test
@@ -12,7 +13,9 @@ class SalesAnalystTest < MiniTest::Test
     :items     => "./data/items.csv",
     :merchants => "./data/merchants.csv",
     :invoices => "./data/invoices.csv",
-    })
+    :invoice_items => "./data/invoice_items.csv",
+    :transactions => "./data/transactions.csv",
+    :customers => "./data/customers.csv"})
     sa = SalesAnalyst.new(se)
     assert_instance_of SalesAnalyst, sa
   end
@@ -22,7 +25,9 @@ class SalesAnalystTest < MiniTest::Test
     :items     => "./data/items.csv",
     :merchants => "./data/merchants.csv",
     :invoices => "./data/invoices.csv",
-    })
+    :invoice_items => "./data/invoice_items.csv",
+    :transactions => "./data/transactions.csv",
+    :customers => "./data/customers.csv"})
     sa = SalesAnalyst.new(se)
 
     assert_equal 2.88, sa.average_items_per_merchant
@@ -33,7 +38,9 @@ class SalesAnalystTest < MiniTest::Test
     :items     => "./data/items.csv",
     :merchants => "./data/merchants.csv",
     :invoices => "./data/invoices.csv",
-    })
+    :invoice_items => "./data/invoice_items.csv",
+    :transactions => "./data/transactions.csv",
+    :customers => "./data/customers.csv"})
     sa = SalesAnalyst.new(se)
 
     assert_equal 3.26, sa.average_items_per_merchant_standard_deviation
@@ -45,7 +52,9 @@ class SalesAnalystTest < MiniTest::Test
     :items     => "./data/items.csv",
     :merchants => "./data/merchants.csv",
     :invoices => "./data/invoices.csv",
-    })
+    :invoice_items => "./data/invoice_items.csv",
+    :transactions => "./data/transactions.csv",
+    :customers => "./data/customers.csv"})
     sa = SalesAnalyst.new(se)
 
     assert_equal 52, sa.merchants_with_high_item_count.length
@@ -56,7 +65,9 @@ class SalesAnalystTest < MiniTest::Test
     :items     => "./data/items.csv",
     :merchants => "./data/merchants.csv",
     :invoices => "./data/invoices.csv",
-    })
+    :invoice_items => "./data/invoice_items.csv",
+    :transactions => "./data/transactions.csv",
+    :customers => "./data/customers.csv"})
     sa = SalesAnalyst.new(se)
 
     assert_equal 16.66, sa.average_item_price_for_merchant(12334105)
@@ -68,7 +79,9 @@ class SalesAnalystTest < MiniTest::Test
     :items     => "./data/items.csv",
     :merchants => "./data/merchants.csv",
     :invoices => "./data/invoices.csv",
-    })
+    :invoice_items => "./data/invoice_items.csv",
+    :transactions => "./data/transactions.csv",
+    :customers => "./data/customers.csv"})
     sa = SalesAnalyst.new(se)
 
     assert_equal 350.29, sa.average_average_price_per_merchant
@@ -79,7 +92,9 @@ class SalesAnalystTest < MiniTest::Test
     :items     => "./data/items.csv",
     :merchants => "./data/merchants.csv",
     :invoices => "./data/invoices.csv",
-    })
+    :invoice_items => "./data/invoice_items.csv",
+    :transactions => "./data/transactions.csv",
+    :customers => "./data/customers.csv"})
     sa = SalesAnalyst.new(se)
 
     assert_equal 5, sa.golden_items.length
@@ -90,7 +105,9 @@ class SalesAnalystTest < MiniTest::Test
     :items     => "./data/items.csv",
     :merchants => "./data/merchants.csv",
     :invoices => "./data/invoices.csv",
-    })
+    :invoice_items => "./data/invoice_items.csv",
+    :transactions => "./data/transactions.csv",
+    :customers => "./data/customers.csv"})
     sa = SalesAnalyst.new(se)
 
     assert_equal 10.49, sa.average_invoices_per_merchant
@@ -101,7 +118,9 @@ class SalesAnalystTest < MiniTest::Test
     :items     => "./data/items.csv",
     :merchants => "./data/merchants.csv",
     :invoices => "./data/invoices.csv",
-    })
+    :invoice_items => "./data/invoice_items.csv",
+    :transactions => "./data/transactions.csv",
+    :customers => "./data/customers.csv"})
     sa = SalesAnalyst.new(se)
 
     assert_equal 3.29, sa.average_invoices_per_merchant_standard_deviation
@@ -112,7 +131,9 @@ class SalesAnalystTest < MiniTest::Test
     :items     => "./data/items.csv",
     :merchants => "./data/merchants.csv",
     :invoices => "./data/invoices.csv",
-    })
+    :invoice_items => "./data/invoice_items.csv",
+    :transactions => "./data/transactions.csv",
+    :customers => "./data/customers.csv"})
     sa = SalesAnalyst.new(se)
 
     assert_equal 12, sa.top_merchants_by_invoice_count.length
@@ -124,7 +145,9 @@ class SalesAnalystTest < MiniTest::Test
     :items     => "./data/items.csv",
     :merchants => "./data/merchants.csv",
     :invoices => "./data/invoices.csv",
-    })
+    :invoice_items => "./data/invoice_items.csv",
+    :transactions => "./data/transactions.csv",
+    :customers => "./data/customers.csv"})
     sa = SalesAnalyst.new(se)
 
     assert_equal 4, sa.bottom_merchants_by_invoice_count.length
@@ -133,20 +156,24 @@ class SalesAnalystTest < MiniTest::Test
 
   def test_it_calculates_top_days_by_invoice_count
     se = SalesEngine.from_csv({
-      :items     => "./data/items.csv",
-      :merchants => "./data/merchants.csv",
-      :invoices => './data/invoices.csv'
-    })
+    :items     => "./data/items.csv",
+    :merchants => "./data/merchants.csv",
+    :invoices => "./data/invoices.csv",
+    :invoice_items => "./data/invoice_items.csv",
+    :transactions => "./data/transactions.csv",
+    :customers => "./data/customers.csv"})
     sa = SalesAnalyst.new(se)
     assert_equal [["Wednesday", 741]], sa.top_days_by_invoice_count
   end
 
   def test_it_calculates_percentage_of_invoices_status
     se = SalesEngine.from_csv({
-      :items     => "./data/items.csv",
-      :merchants => "./data/merchants.csv",
-      :invoices => './data/invoices.csv'
-    })
+    :items     => "./data/items.csv",
+    :merchants => "./data/merchants.csv",
+    :invoices => "./data/invoices.csv",
+    :invoice_items => "./data/invoice_items.csv",
+    :transactions => "./data/transactions.csv",
+    :customers => "./data/customers.csv"})
     sa = SalesAnalyst.new(se)
     assert_equal 29.55, sa.invoice_status(:pending)
     assert_equal 56.95, sa.invoice_status(:shipped)

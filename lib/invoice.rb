@@ -25,7 +25,7 @@ class Invoice
   end
 
   def items
-    @iv_repo.items_in_invoice_repo(self.merchant_id)
+    @iv_repo.items_in_invoice_repo(id)
   end
 
   def transactions

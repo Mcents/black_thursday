@@ -32,13 +32,13 @@ class CustomerRepository
 
   def find_all_by_first_name(name)
     all.find_all do |cust|
-     cust.first_name == name
+     cust.first_name.downcase.include?(name.downcase)
     end
   end
 
   def find_all_by_last_name(name)
     all.find_all do |cust|
-     cust.last_name == name
+     cust.last_name.downcase.include?(name.downcase)
     end
   end
 

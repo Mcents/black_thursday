@@ -33,7 +33,7 @@ class TransactionRepositoryTest < MiniTest::Test
 
   def test_it_can_find_all_by_result
     tr = TransactionRepository.new('./test/data/transactions_fixture.csv', sales_engine = nil)
-    trans = tr.find_all_by_result(:success)
+    trans = tr.find_all_by_result("success")
 
     assert_equal 8, trans.count
   end

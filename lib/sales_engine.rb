@@ -55,10 +55,20 @@ class SalesEngine
     customers_by_id(result)
   end
 
+  def find_invoice_by_transaction_invoice_id(invoice_id)
+    @invoices.find_by_id(invoice_id)
+  end
+
   def find_merchants_by_customer_id(customer_id)
     invoices = @invoices.find_all_by_customer_id(customer_id)
     merchant_ids = iterate_merchants(invoices)
     merchants_by_id(merchant_ids)
+  end
+
+  def find_invoice_items_by_invoice_id(invoice_id)
+    result = @invoice_items.find_all_by_invoice_id(invoice_id)
+    result = iterate_item_ids(result)
+    multiple_item_ids(result)
   end
 
   def iterate_customers(invoices)
@@ -73,12 +83,23 @@ class SalesEngine
     end
   end
 
+  def iterate_item_ids(result)
+    result = result.map do |invoice_item|
+      invoice_item.item_id
+    end
+  end
+
+
   def customers_by_id(customer_ids)
     @customers.customers_by_id(customer_ids)
   end
 
   def merchants_by_id(merchant_ids)
     @merchants.merchants_by_id(merchant_ids)
+  end
+
+  def multiple_item_ids(item_ids)
+    @items.find_by_multiple_item_ids(item_ids)
   end
 
   def total(id)
@@ -89,16 +110,16 @@ class SalesEngine
     @transactions.is_paid_in_full?(invoice_id)
   end
 
-  se = SalesEngine.from_csv({
-  :items => "./data/items.csv",
-  :merchants => "./data/merchants.csv",
-  :invoices => "./data/invoices.csv",
-  :invoice_items => "./data/invoice_items.csv",
-  :transactions => "./data/transactions.csv",
-  :customers => "./data/customers.csv"
-})
-
-binding.pry
+#   se = SalesEngine.from_csv({
+#   :items => "./data/items.csv",
+#   :merchants => "./data/merchants.csv",
+#   :invoices => "./data/invoices.csv",
+#   :invoice_items => "./data/invoice_items.csv",
+#   :transactions => "./data/transactions.csv",
+#   :customers => "./data/customers.csv"
+# })
+#
+# binding.pry
 
 
 end

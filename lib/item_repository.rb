@@ -64,6 +64,12 @@ class ItemRepository
     end
   end
 
+  def find_by_multiple_item_ids(item_ids)
+    results = item_ids.map do |item_id|
+      find_by_id(item_id)
+    end
+  end
+
   def sales_engine_merchant_id(merchant_id)
     find_all_by_merchant_id(merchant_id)
   end

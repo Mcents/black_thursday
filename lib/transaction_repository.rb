@@ -48,8 +48,8 @@ class TransactionRepository
     end
   end
 
-  def invoices_in_trans_repo(id)
-    @sales_engine.collected_transactions(id)
+  def invoices_in_trans_repo(invoice_id)
+     @sales_engine.find_invoice_by_transaction_invoice_id(invoice_id)
   end
 
   def is_paid_in_full?(invoice_id)

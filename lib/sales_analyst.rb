@@ -2,6 +2,7 @@ require 'pry'
 require_relative 'sales_engine'
 require 'bigdecimal'
 
+
 class SalesAnalyst
   attr_reader :sales_engine
 
