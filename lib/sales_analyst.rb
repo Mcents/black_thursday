@@ -187,6 +187,10 @@ class SalesAnalyst
     sales_engine.invoices.all.find_all { |invoice| !invoice.is_paid_in_full? }
   end
 
+  def merchants_ranked_by_revenue
+    top_revenue_earners(sales_engine.merchants.all.count)
+  end
+
   def merchants_with_pending_invoices(pending = pending_invoices)
     merchant_list = pending.map(&:merchant_id).uniq
     merchant_list.map do |merchant_id|
