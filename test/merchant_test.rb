@@ -1,13 +1,9 @@
-# require 'simplecov'
-# SimpleCov.start
 require './test/test_helper'
 require_relative '../lib/merchant'
 require 'pry'
 
 
 class MerchantTest < MiniTest::Test
-
-
   def setup
     @merchant = Merchant.new({:id => 1, :name => "Burger King"}, mr = nil)
   end
@@ -21,8 +17,5 @@ class MerchantTest < MiniTest::Test
 
     assert_equal "Burger King", @merchant.name
   end
-
-
-
 
 end

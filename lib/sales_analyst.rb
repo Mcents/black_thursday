@@ -182,6 +182,12 @@ class SalesAnalyst
       pair[1]
     end.to_h.keys.reverse[0..(num-1)]
   end
-  
+
+  def merchants_with_pending_invoices
+    
+
+
+  end
+
 
 end

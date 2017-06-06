@@ -1,5 +1,4 @@
-require 'minitest/autorun'
-require 'minitest/pride'
+require './test/test_helper'
 require_relative '../lib/item'
 require 'pry'
 require 'bigdecimal'
@@ -51,4 +50,11 @@ class ItemTest < MiniTest::Test
 
     assert_equal updated_at, @item.updated_at
   end
+
+  def test_unit_price_to_dollars_returns_a_float
+    assert_equal @item.unit_price_to_dollars.class, Float
+    assert_equal @item.unit_price_to_dollars, 10.99
+
+  end
+
 end
