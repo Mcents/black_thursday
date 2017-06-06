@@ -74,8 +74,11 @@ class InvoiceRepository
     @sales_engine.total(id)
   end
 
-  # def invoice_repo_paid_in_full?(id)
-  #   @sales_engine.invoice_paid_in_full?(id)
-  # end
+  def find_all_by_date(date)
+    date = date.strftime('%D') if date.is_a?(Time)
+    all.find_all do |invoice|
+      invoice.created_at.strftime("%D") == date
+    end
+  end
 
 end

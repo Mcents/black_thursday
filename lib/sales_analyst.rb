@@ -154,4 +154,34 @@ class SalesAnalyst
     invoice_staus_percentage(array_1)
   end
 
+  def find_invoices_by_date(date)
+    @sales_engine.invoices.find_invoices_by_date(date)
+  end
+
+  def invoices_on_date(date)
+    date = date.strftime('%D') if date.is_a?(Time)
+    sales_engine.invoices.find_all_by_date(date)
+  end
+
+  def total_revenue_by_date(date)
+    invoices_on_date(date).reduce(0) do |total, invoice|
+      if invoice.total.nil?
+        total += 0
+      else
+        total += invoice.total
+      end
+    end
+  end
+
+  def top_revenue_earners(num=20)
+    top_earners = Hash.new
+    sales_engine.merchants.all.map do |merchant|
+      top_earners[merchant] = merchant.revenue_for_merchant
+    end
+    top_earners.sort_by do |pair|
+      pair[1]
+    end.to_h.keys.reverse[0..(num-1)]
+  end
+  
+
 end
