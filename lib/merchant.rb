@@ -20,12 +20,22 @@ class Merchant
     @mr.customers_in_merch_repo(id)
   end
 
-  def successful_invoices
+  def successful_invoices?
     invoices.find_all { |invoice| invoice.is_paid_in_full? }
   end
 
+  # def pending_invoices
+  #   invoices.find_all { |invoice| invoice.status == :pending }
+  # end
+
+  def has_pending_invoice?
+    invoices.any? do |invoice|
+      !invoice.is_paid_in_full?
+    end
+  end
+
   def revenue_for_merchant
-    successful_invoices.reduce(0) do |total, invoice|
+    successful_invoices?.reduce(0) do |total, invoice|
       if invoice.total.nil?
         total += 0
       else

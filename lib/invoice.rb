@@ -36,8 +36,13 @@ class Invoice
     @iv_repo.customer_in_inv_repo(@customer_id)
   end
 
+  # def is_paid_in_full?
+  #   @iv_repo.is_paid_in_full?(@id)
+  # end
   def is_paid_in_full?
-    @iv_repo.is_paid_in_full?(@id)
+    transactions.any? do |transaction|
+      transaction.result == 'success'
+    end
   end
 
   def total

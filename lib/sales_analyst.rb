@@ -183,11 +183,22 @@ class SalesAnalyst
     end.to_h.keys.reverse[0..(num-1)]
   end
 
-  def merchants_with_pending_invoices
-    
 
+  # def merchants_with_pending_invoices
+  #   sales_engine.merchants.all.find_all do |merchant|
+  #     merchant.has_pending_invoice?
+  #   end.compact
+  # end
 
+  def pending_invoices
+    sales_engine.invoices.all.find_all { |invoice| !invoice.is_paid_in_full? }
   end
 
+  def merchants_with_pending_invoices(pending = pending_invoices)
+    merchant_list = pending.map(&:merchant_id).uniq
+    merchant_list.map do |merchant_id|
+      sales_engine.merchants.find_by_id(merchant_id)
+    end
+  end
 
 end
