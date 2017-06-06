@@ -217,9 +217,8 @@ class SalesAnalystTest < MiniTest::Test
     sa = SalesAnalyst.new(se)
 
     assert_equal 467, sa.merchants_with_pending_invoices.length
-
-    # assert_instance_of Array, sa.merchants_with_pending_invoices
-    # assert_instance_of Merchant, sa.merchants_with_pending_invoices[0]
+    assert_instance_of Array, sa.merchants_with_pending_invoices
+    assert_instance_of Merchant, sa.merchants_with_pending_invoices[0]
   end
 
 end
