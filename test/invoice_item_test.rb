@@ -9,7 +9,7 @@ class InvoiceItemTest < MiniTest::Test
   def setup
     item_created_at = '2017-05-27 15:44:02 UTC'
     item_updated_at = '2017-05-29 14:56:56 UTC'
-    @item = InvoiceItem.new({
+    @invoice_item = InvoiceItem.new({
     :id => 1,
     :item_id => 263454779,
     :invoice_id => 1,
@@ -22,29 +22,29 @@ class InvoiceItemTest < MiniTest::Test
 
   def test_it_can_call_on_id
 
-    assert_equal 1, @item.id
+    assert_equal 1, @invoice_item.id
   end
 
   def test_it_can_call_on_item_id
 
-    assert_equal 263454779, @item.item_id
+    assert_equal 263454779, @invoice_item.item_id
   end
 
 
   def test_it_can_call_on_invoice_id
 
-    assert_equal 1, @item.invoice_id
+    assert_equal 1, @invoice_item.invoice_id
   end
 
   def test_item_has_a_create_date
     created_at = Time.gm(2017, 5, 27, 15, 44, 2)
 
-    assert_equal created_at, @item.created_at
+    assert_equal created_at, @invoice_item.created_at
   end
 
   def test_item_has_an_update_date
     updated_at = Time.gm(2017, 5, 29, 14, 56, 56)
 
-    assert_equal updated_at, @item.updated_at
+    assert_equal updated_at, @invoice_item.updated_at
   end
 end
