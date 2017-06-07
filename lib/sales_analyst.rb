@@ -106,12 +106,16 @@ class SalesAnalyst
       end
   end
 
+  def times_by_two
+    (average_invoices_per_merchant_standard_deviation * 2)
+  end
+
   def average_inv_merch_plus_dev
-    (average_invoices_per_merchant_standard_deviation * 2) + average_invoices_per_merchant
+    times_by_two + average_invoices_per_merchant
   end
 
   def average_inv_merch_minus_dev
-    average_invoices_per_merchant - (average_invoices_per_merchant_standard_deviation * 2)
+    average_invoices_per_merchant - times_by_two
   end
 
   def bottom_merchants_by_invoice_count
