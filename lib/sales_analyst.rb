@@ -135,6 +135,7 @@ class SalesAnalyst
     day_deviation = generate_deviation(average, invoices_per_day)
     collect_invoices_per_day.find_all do |day,count|
       count > (average + day_deviation)
+
     end
   end
 
@@ -195,6 +196,24 @@ class SalesAnalyst
     merchant_list = pending.map(&:merchant_id).uniq
     merchant_list.map do |merchant_id|
       sales_engine.merchants.find_by_id(merchant_id)
+    end
+  end
+
+  def merchants_with_only_one_item
+    sales_engine.merchants.all.find_all do |merch|
+      merch.items.count == 1
+    end
+  end
+
+  def merchants_with_only_one_item
+    sales_engine.merchants.all.find_all do |merch|
+      merch.items.count == 1
+    end
+  end
+
+  def merchants_with_only_one_item_registered_in_month(month_name)
+    sales_engine.merchants.all.find_all do |merchant|
+      merchant.items.count == 1 && merchant.created_month.downcase == month_name.downcase
     end
   end
 

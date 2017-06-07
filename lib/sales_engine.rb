@@ -89,7 +89,6 @@ class SalesEngine
     end
   end
 
-
   def customers_by_id(customer_ids)
     @customers.customers_by_id(customer_ids)
   end

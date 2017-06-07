@@ -1,10 +1,12 @@
 class Merchant
   attr_reader  :id,
-               :name
+               :name,
+               :created_at
 
   def initialize(hash, mr)
     @id   = hash[:id].to_i
     @name = hash[:name]
+    @created_at = hash[:created_at]
     @mr = mr
   end
 
@@ -24,10 +26,6 @@ class Merchant
     invoices.find_all { |invoice| invoice.is_paid_in_full? }
   end
 
-  # def pending_invoices
-  #   invoices.find_all { |invoice| invoice.status == :pending }
-  # end
-
   def has_pending_invoice?
     invoices.any? do |invoice|
       !invoice.is_paid_in_full?
@@ -42,6 +40,24 @@ class Merchant
         total += invoice.total
       end
       total
+    end
+  end
+
+  def created_month
+    month = created_at.split('-')[1].strip.to_i
+    case month
+    when 1 then 'January'
+    when 2 then 'February'
+    when 3 then 'March'
+    when 4 then 'April'
+    when 5 then 'May'
+    when 6 then 'June'
+    when 7 then 'July'
+    when 8 then 'August'
+    when 9 then 'September'
+    when 10 then 'October'
+    when 11 then 'November'
+    when 12 then 'December'
     end
   end
 
