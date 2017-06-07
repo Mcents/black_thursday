@@ -29,6 +29,8 @@ class TransactionRepositoryTest < MiniTest::Test
     trans = tr.find_all_by_credit_card_number(4068631943231473)
 
     assert_equal 1, trans.count
+    assert tr.find_all_by_credit_card_number("abcde").is_a?(Array)
+    assert_equal 0, tr.find_all_by_credit_card_number("vabcde").length
   end
 
   def test_it_can_find_all_by_result
@@ -36,5 +38,7 @@ class TransactionRepositoryTest < MiniTest::Test
     trans = tr.find_all_by_result("success")
 
     assert_equal 8, trans.count
+    assert tr.find_all_by_result(756879).is_a?(Array)
+    assert_equal 0, tr.find_all_by_result(753479).length
   end
 end
