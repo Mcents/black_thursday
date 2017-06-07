@@ -262,7 +262,6 @@ class SalesAnalystTest < MiniTest::Test
     sa = SalesAnalyst.new(se)
 
     assert_instance_of BigDecimal, sa.revenue_by_merchant(12334123)
-
   end
 
   def test_for_most_sold_item_for_merchant
@@ -277,8 +276,5 @@ class SalesAnalystTest < MiniTest::Test
 
     assert_instance_of Array, sa.most_sold_item_for_merchant(12335938)
     assert_equal 3, sa.most_sold_item_for_merchant(12335938).length
-
   end
-
-
 end
