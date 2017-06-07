@@ -231,13 +231,33 @@ class SalesAnalyst
     end
   end
 
-
   def most_sold_item_for_merchant(merchant_id)
-    group = find_quantity_for_each_item_id(merchant_id)
-    max = group.max_by { |_, v| v }[1]
+    most_sold = Hash.new(0)
+    merchant = sales_engine.merchants.find_by_id(merchant_id)
 
-    highest = group.select {|_, v| v == max}.to_a
-    highest.map! {|array| engine.items.find_by_id(array[0])}
+    merchant.successful_invoices?.map do |invoice|
+      invoice.invoice_items.map do |invoice_item|
+        most_sold[invoice_item.item_id] += invoice_item.quantity
+      end
+    end
+    iterate_most_sold_item(most_sold)
+  end
+
+  def iterate_most_sold_item(hash)
+    grab = hash.sort_by do |group|
+      group[1]
+    end
+    top = grab[-1]
+    items = grab.find_all do |item|
+      item[1] == top[1]
+    end
+    collect_most_sold_items(items)
+  end
+
+  def collect_most_sold_items(item_ids)
+    item_ids.map do |item|
+      sales_engine.items.find_by_id(item[0])
+    end.compact
   end
 
 end

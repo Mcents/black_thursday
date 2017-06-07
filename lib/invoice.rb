@@ -32,6 +32,10 @@ class Invoice
     @iv_repo.transactions_in_inv_repo(id)
   end
 
+  def invoice_items
+    @iv_repo.sales_engine.invoice_items.find_all_by_invoice_id(id)
+  end
+
   def customer
     @iv_repo.customer_in_inv_repo(@customer_id)
   end

@@ -25,7 +25,7 @@ class ItemRepository
   end
 
   def inspect
-    "#<#{self.class} #{@items.size} rows>"
+    "#<#{self.class} #{@all.size} rows>"
   end
 
   def find_by_id(id)
@@ -78,7 +78,4 @@ class ItemRepository
     @sales_engine.merchant(item_id)
   end
 
-  def items
-    @items
-  end
 end

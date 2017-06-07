@@ -22,7 +22,7 @@ class InvoiceRepository
   end
 
   def inspect
-    "#<#{self.class} #{@invoices.size} rows>"
+    "#<#{self.class} #{@all.size} rows>"
   end
 
   def find_by_id(id)
