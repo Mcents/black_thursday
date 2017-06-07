@@ -236,6 +236,21 @@ class SalesAnalystTest < MiniTest::Test
   #   assert_instance_of Merchant, sa.merchants_with_only_one_item[0]
   # end
 
+  # def test_for_merchants_with_only_one_item_in_month
+  #   se = SalesEngine.from_csv({
+  #   :items     => "./data/items.csv",
+  #   :merchants => "./data/merchants.csv",
+  #   :invoices => "./data/invoices.csv",
+  #   :invoice_items => "./data/invoice_items.csv",
+  #   :transactions => "./data/transactions.csv",
+  #   :customers => "./data/customers.csv"})
+  #   sa = SalesAnalyst.new(se)
+  #
+  #   assert_equal 24, sa.merchants_with_only_one_item_registered_in_month("May").length
+  #   assert_instance_of Array, sa.merchants_with_only_one_item_registered_in_month("March")
+  #   assert_instance_of Merchant, sa.merchants_with_only_one_item_registered_in_month("April")[0]
+  # end
+
   def test_for_merchants_with_only_one_item_in_month
     se = SalesEngine.from_csv({
     :items     => "./data/items.csv",
@@ -246,9 +261,9 @@ class SalesAnalystTest < MiniTest::Test
     :customers => "./data/customers.csv"})
     sa = SalesAnalyst.new(se)
 
-    assert_equal 24, sa.merchants_with_only_one_item_registered_in_month("May").length
-    assert_instance_of Array, sa.merchants_with_only_one_item_registered_in_month("March")
-    assert_instance_of Merchant, sa.merchants_with_only_one_item_registered_in_month("April")[0]
+    assert_instance_of BigDecimal, sa.revenue_by_merchant(12334123)
+    assert_equal 263553486, sa.revenue_by_merchant(12334123)
+    # assert_instance_of Merchant, sa.merchants_with_only_one_item_registered_in_month("April")[0]
   end
 
 end

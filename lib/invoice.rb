@@ -48,4 +48,11 @@ class Invoice
     end
   end
 
+  def invoice_count
+    return 0.0 unless is_paid_in_full?
+    @iv_repo.sales_engine.invoice_items.all.inject(0) do |sum, invoice_item|
+      sum + invoice_item.unit_price * invoice_item.quantity
+    end
+  end
+
 end

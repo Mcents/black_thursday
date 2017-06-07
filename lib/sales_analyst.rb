@@ -217,4 +217,16 @@ class SalesAnalyst
     end
   end
 
+  def invoices_grouped_by_merchant
+    sales_engine.invoices.all.group_by do |invoice|
+      invoice.merchant_id
+    end
+  end
+
+  def revenue_by_merchant(merchant_id)
+    invoices_grouped_by_merchant[merchant_id].inject(0) do |sum, invoice|
+      sum + invoice.invoice_count
+    end
+  end
+
 end
