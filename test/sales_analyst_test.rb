@@ -153,17 +153,17 @@ class SalesAnalystTest < MiniTest::Test
   #
   # end
   #
-  # def test_it_calculates_top_days_by_invoice_count
-  #   se = SalesEngine.from_csv({
-  #   :items     => "./data/items.csv",
-  #   :merchants => "./data/merchants.csv",
-  #   :invoices => "./data/invoices.csv",
-  #   :invoice_items => "./data/invoice_items.csv",
-  #   :transactions => "./data/transactions.csv",
-  #   :customers => "./data/customers.csv"})
-  #   sa = SalesAnalyst.new(se)
-  #   assert_equal [["Wednesday", 741]], sa.top_days_by_invoice_count
-  # end
+  def test_it_calculates_top_days_by_invoice_count
+    se = SalesEngine.from_csv({
+    :items     => "./data/items.csv",
+    :merchants => "./data/merchants.csv",
+    :invoices => "./data/invoices.csv",
+    :invoice_items => "./data/invoice_items.csv",
+    :transactions => "./data/transactions.csv",
+    :customers => "./data/customers.csv"})
+    sa = SalesAnalyst.new(se)
+    assert_equal ["Wednesday"], sa.top_days_by_invoice_count
+  end
   #
   # def test_it_calculates_percentage_of_invoices_status
   #   se = SalesEngine.from_csv({
@@ -251,19 +251,18 @@ class SalesAnalystTest < MiniTest::Test
   #   assert_instance_of Merchant, sa.merchants_with_only_one_item_registered_in_month("April")[0]
   # end
 
-  def test_for_merchants_with_only_one_item_in_month
-    se = SalesEngine.from_csv({
-    :items     => "./data/items.csv",
-    :merchants => "./data/merchants.csv",
-    :invoices => "./data/invoices.csv",
-    :invoice_items => "./data/invoice_items.csv",
-    :transactions => "./data/transactions.csv",
-    :customers => "./data/customers.csv"})
-    sa = SalesAnalyst.new(se)
-
-    assert_instance_of BigDecimal, sa.revenue_by_merchant(12334123)
-    assert_equal 263553486, sa.revenue_by_merchant(12334123)
-    # assert_instance_of Merchant, sa.merchants_with_only_one_item_registered_in_month("April")[0]
-  end
+  # def test_for_merchants_with_only_one_item_in_month
+  #   se = SalesEngine.from_csv({
+  #   :items     => "./data/items.csv",
+  #   :merchants => "./data/merchants.csv",
+  #   :invoices => "./data/invoices.csv",
+  #   :invoice_items => "./data/invoice_items.csv",
+  #   :transactions => "./data/transactions.csv",
+  #   :customers => "./data/customers.csv"})
+  #   sa = SalesAnalyst.new(se)
+  #
+  #   assert_instance_of BigDecimal, sa.revenue_by_merchant(12334123)
+  #   assert_equal 263553486, sa.revenue_by_merchant(12334123)
+  # end
 
 end

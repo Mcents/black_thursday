@@ -133,10 +133,12 @@ class SalesAnalyst
     average = (sales_engine.invoices.all.count / 7).to_f
     invoices_per_day = collect_invoices_per_day.values
     day_deviation = generate_deviation(average, invoices_per_day)
-    collect_invoices_per_day.find_all do |day,count|
+    var = collect_invoices_per_day.find_all do |day,count|
       count > (average + day_deviation)
-
     end
+    var = var.map do |day|
+    day.join.to_s[0..-4].split
+  end.flatten
   end
 
   def invoice_staus_percentage(array)
@@ -227,6 +229,15 @@ class SalesAnalyst
     invoices_grouped_by_merchant[merchant_id].inject(0) do |sum, invoice|
       sum + invoice.invoice_count
     end
+  end
+
+
+  def most_sold_item_for_merchant(merchant_id)
+    group = find_quantity_for_each_item_id(merchant_id)
+    max = group.max_by { |_, v| v }[1]
+
+    highest = group.select {|_, v| v == max}.to_a
+    highest.map! {|array| engine.items.find_by_id(array[0])}
   end
 
 end

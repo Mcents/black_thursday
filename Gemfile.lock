@@ -6,12 +6,11 @@ GEM
       descendants_tracker (~> 0.0.4)
       ice_nine (~> 0.11.0)
       thread_safe (~> 0.3, >= 0.3.1)
-    cane (3.0.0)
-      parallel
     codeclimate-engine-rb (0.4.0)
       virtus (~> 1.0)
     coercible (1.0.0)
       descendants_tracker (~> 0.0.1)
+    crane (0.2.2)
     descendants_tracker (0.0.4)
       thread_safe (~> 0.3, >= 0.3.1)
     docile (1.1.5)
@@ -19,7 +18,6 @@ GEM
     ice_nine (0.11.2)
     json (2.1.0)
     minitest (5.10.2)
-    parallel (1.11.2)
     parser (2.4.0.0)
       ast (~> 2.2)
     rainbow (2.2.2)
@@ -45,7 +43,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  cane
+  crane
   minitest
   rake
   reek
