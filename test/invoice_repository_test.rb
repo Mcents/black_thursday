@@ -19,7 +19,7 @@ class InvoiceRepositoryTest < MiniTest::Test
     ir = InvoiceRepository.new('./test/data/invoices_fixture.csv', sales_engine = nil)
     results = ir.find_all_by_customer_id(1)
 
-    assert_equal 1, results.count
+    assert_equal 8, results.count
   end
 
   def test_if_can_find_all_by_merchant_id

@@ -64,9 +64,9 @@ class SalesAnalyst
 
   def merchants_with_high_item_count
     mr = sales_engine.merchants.all
-    var = average_items_per_merchant + average_items_per_merchant_standard_deviation
+    v = average_items_per_merchant+average_items_per_merchant_standard_deviation
     mr.find_all do |merchant|
-      merchant.items.length >= var
+      merchant.items.length >= v
     end
   end
 
@@ -92,7 +92,7 @@ class SalesAnalyst
   def golden_items
     ir = sales_engine.items.all
     prices = ir.map {|item| item.unit_price}
-    dev = (average_average_price_per_merchant) + (standard_deviation(prices) * 2)
+    dev = (average_average_price_per_merchant)+(standard_deviation(prices) * 2)
     ir.find_all do |item|
       item.unit_price >= dev
     end
@@ -214,8 +214,8 @@ class SalesAnalyst
   end
 
   def merchants_with_only_one_item_registered_in_month(month_name)
-    sales_engine.merchants.all.find_all do |merchant|
-      merchant.items.count == 1 && merchant.created_month.downcase == month_name.downcase
+    sales_engine.merchants.all.find_all do |m|
+      m.items.count == 1 && m.created_month.downcase == month_name.downcase
     end
   end
 

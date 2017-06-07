@@ -37,11 +37,6 @@ class InvoiceItemTest < MiniTest::Test
     assert_equal 1, @item.invoice_id
   end
 
-  def test_it_can_call_on_quantity
-
-    assert_equal 5, @item.quantity
-  end
-
   def test_item_has_a_create_date
     created_at = Time.gm(2017, 5, 27, 15, 44, 2)
 

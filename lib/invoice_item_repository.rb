@@ -12,12 +12,12 @@ class InvoiceItemRepository
   end
 
   def populate_invoice_item_repo(file)
-    invoice_item_lines = CSV.open(file, headers: true, header_converters: :symbol)
-    invoice_item_lines.each do |row|
+    it_lines = CSV.open(file, headers: true, header_converters: :symbol)
+    it_lines.each do |row|
       invoice_item = InvoiceItem.new(row, self)
       all << invoice_item
     end
-    invoice_item_lines.close
+    it_lines.close
   end
 
   def inspect

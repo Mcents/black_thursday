@@ -16,12 +16,6 @@ class ItemRepositoryTest < MiniTest::Test
     assert_instance_of Item, item
   end
 
-  def test_it_can_find_all_by_customer_id
-    ir = ItemRepository.new('./test/data/items_fixture.csv', sales_engine = nil)
-
-    assert_equal 1, ir.find_all_by_customer_id(2).length
-  end
-
   def test_if_can_find_by_name
     ir = ItemRepository.new('./test/data/items_fixture.csv', sales_engine = nil)
     item = ir.find_by_name("Glitter scrabble frames")
