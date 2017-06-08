@@ -153,8 +153,12 @@ class SalesAnalyst
   end.flatten
   end
 
+  def in_leng_dec
+    BigDecimal.new(@sales_engine.invoices.all.length)
+  end
+
   def invoice_staus_percentage(array)
-    percentage = BigDecimal.new(array.length) / BigDecimal.new(@sales_engine.invoices.all.length)
+    percentage = BigDecimal.new(array.length) / in_leng_dec
     percentage = percentage.to_f * 100
     percentage.round(2)
   end
