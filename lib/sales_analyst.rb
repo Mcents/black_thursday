@@ -260,15 +260,15 @@ class SalesAnalyst
   end
 
   def best_item_for_merchant(merchant_id)
-    best_items = Hash.new(0)
+    bi = Hash.new(0)
     merchant = sales_engine.merchants.find_by_id(merchant_id)
 
     merchant.successful_invoices?.map do |invoice|
-      invoice.invoice_items.map do |invoice_item|
-        best_items[invoice_item.item_id] += invoice_item.unit_price * invoice_item.quantity
+      invoice.invoice_items.map do |inv_i|
+        bi[inv_i.item_id] += inv_i.unit_price*inv_i.quantity
       end
     end
-    find_best_item(best_items)
+    find_best_item(bi)
   end
 
   def iterate_most_sold_item(hash)

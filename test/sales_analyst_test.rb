@@ -3,6 +3,7 @@ require './test/test_helper'
 require_relative '../lib/sales_engine'
 require_relative '../lib/sales_analyst'
 require 'csv'
+require 'pry'
 
 
 class SalesAnalystTest < MiniTest::Test
