@@ -259,6 +259,18 @@ class SalesAnalyst
     iterate_most_sold_item(most_sold)
   end
 
+  def best_item_for_merchant(merchant_id)
+    best_items = Hash.new(0)
+    merchant = sales_engine.merchants.find_by_id(merchant_id)
+
+    merchant.successful_invoices?.map do |invoice|
+      invoice.invoice_items.map do |invoice_item|
+        best_items[invoice_item.item_id] += invoice_item.unit_price * invoice_item.quantity
+      end
+    end
+    find_best_item(best_items)
+  end
+
   def iterate_most_sold_item(hash)
     grab = hash.sort_by do |group|
       group[1]
@@ -274,6 +286,13 @@ class SalesAnalyst
     item_ids.map do |item|
       sales_engine.items.find_by_id(item[0])
     end.compact
+  end
+
+  def find_best_item(best_items)
+    best_item = best_items.max_by do |pair|
+      pair[1]
+    end
+    sales_engine.items.find_by_id(best_item[0])
   end
 
 end

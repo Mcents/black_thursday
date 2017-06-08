@@ -23,7 +23,7 @@ class CustomerRepositoryTest < MiniTest::Test
     assert_equal 1, cust.count
   end
 
-  def test_it_can_find_all_by_first_name
+  def test_it_can_find_all_by_last_name
     cr = CustomerRepository.new('./test/data/customers_fixture.csv', sales_engine = nil)
     cust = cr.find_all_by_last_name("Ondricka")
 
