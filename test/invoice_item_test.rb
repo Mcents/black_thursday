@@ -6,6 +6,20 @@ require 'time'
 
 class InvoiceItemTest < MiniTest::Test
 
+  def test_it_exists
+    @ii = InvoiceItem.new({
+    :id => 1,
+    :item_id => 263454779,
+    :invoice_id => 1,
+    :quantity => 5,
+    :unit_price  => 1099,
+    :created_at  => '2017-05-27 15:44:02 UTC',
+    :updated_at  => '2017-05-29 14:56:56 UTC',
+    }, iv_item_repo = nil)
+
+    assert_instance_of InvoiceItem, @ii
+  end
+
   def test_it_can_call_on_id
     @ii = InvoiceItem.new({
     :id => 1,
@@ -58,10 +72,9 @@ class InvoiceItemTest < MiniTest::Test
     :created_at  => '2017-05-27 15:44:02 UTC',
     :updated_at  => '2017-05-29 14:56:56 UTC',
     }, iv_item_repo = nil)
-    created_at = Time.gm(2017, 5, 27, 15, 44, 2)
 
-    assert_equal created_at, @ii.created_at
-  end
+    assert_equal Time.parse("2017-05-27 15:44:02 UTC"), @ii.created_at
+    end
 
   def test_item_has_an_update_date
     @ii = InvoiceItem.new({
@@ -73,9 +86,8 @@ class InvoiceItemTest < MiniTest::Test
     :created_at  => '2017-05-27 15:44:02 UTC',
     :updated_at  => '2017-05-29 14:56:56 UTC',
     }, iv_item_repo = nil)
-    updated_at = Time.gm(2017, 5, 29, 14, 56, 56)
 
-    assert_equal updated_at, @ii.updated_at
+    assert_equal Time.parse("2017-05-29 14:56:56 UTC"), @ii.updated_at
   end
 
   def test_it_gets_the_unit_price
