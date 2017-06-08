@@ -6,20 +6,6 @@ require 'time'
 
 class InvoiceItemTest < MiniTest::Test
 
-  # def setup
-  #   item_created_at = '2017-05-27 15:44:02 UTC'
-  #   item_updated_at = '2017-05-29 14:56:56 UTC'
-  #   @ii = InvoiceItem.new({
-  #   :id => 1,
-  #   :item_id => 263454779,
-  #   :invoice_id => 1,
-  #   :quantity => 5,
-  #   :unit_price  => 1099,
-  #   :created_at  => item_created_at,
-  #   :updated_at  => item_updated_at,
-  #   }, iv_item_repo = nil)
-  # end
-
   def test_it_can_call_on_id
     item_created_at = '2017-05-27 15:44:02 UTC'
     item_updated_at = '2017-05-29 14:56:56 UTC'
